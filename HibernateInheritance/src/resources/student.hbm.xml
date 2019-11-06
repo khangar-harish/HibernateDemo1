@@ -3,11 +3,22 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
     
     <hibernate-mapping>
-    	<class name="com.hash.Student" table="Student">
+    	<class name="com.hash.Student" table="Student" discriminator-value="stud">
     		<id name="id" column="sid">
     			<generator class="increment"></generator>
     		</id>
+    		<discriminator column="type" type="string"></discriminator> 
     		<property name="name" column="sname"/>
     		<property name="email" column="semail"/>
+    		
+    		<subclass name="com.hash.SchoolStudent" discriminator-value="sch_stud">  
+			<property name="salary"></property>  
+			<property name="bonus"></property>  
+			</subclass>  
+			            
+			<subclass name="com.hash.CollegeStudent" discriminator-value="col_stud">  
+			<property name="pay_per_hour"></property>  
+			<property name="contract_duration"></property>  
+			</subclass>  
     	</class>
     </hibernate-mapping>
